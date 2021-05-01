@@ -1,0 +1,13 @@
+target:
+  actual:
+    host: ''
+  expect:
+    host: ''
+option:
+  header: {}
+  method: 'GET'
+  body: ''
+  query: ''
+  type: 'HTML'
+report:
+  dir: ./report
