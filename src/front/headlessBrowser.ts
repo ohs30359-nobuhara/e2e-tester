@@ -15,13 +15,16 @@ export class HeadlessBrowser {
   }
 
   public static async init(cookie: string): Promise<HeadlessBrowser> {
-    const b: Browser = await launch({
-      headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-gpu",
-      ]
-    });
+    const op: any = {}
+
+    // linux時は専用の設定が必要
+    if (process.env.RUN_MODE === 'DOCKER') {
+      op.headless = true;
+      op.executablePath = '/usr/bin/chromium-browser';
+      op.args = ["--no-sandbox", "--disable-gpu"]
+    }
+
+    const b: Browser = await launch(op);
     return new HeadlessBrowser(b, cookie);
   }
 }

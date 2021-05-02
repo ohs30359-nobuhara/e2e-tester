@@ -26,5 +26,23 @@ report:
   dir: './report'
 ```
 
-run `npm run start` after creating the config file.  
+### mac 
+
+run `npm i  && npm run start` after creating the config file.  
 in the sample, report is created under the `./report` directory.
+
+### docker 
+
+create an image if you want to start with docker.
+```shell
+docker build -t ${image_name} ./
+```
+
+execute the command by specifying the directory where the config file is located and the directory where the result is output.
+
+```shell
+docker run  \
+  -v $(pwd)/${config_path}:/app/config \
+  -v $(pwd)/${report_path}:/app/report \
+  -it ${image_name}
+```

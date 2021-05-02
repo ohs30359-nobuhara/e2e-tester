@@ -3,11 +3,10 @@ const nodeExternals = require('webpack-node-externals');
 const {TsConfigPathsPlugin} = require('awesome-typescript-loader');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/main.ts',
   target: 'node',
   externals: [nodeExternals()],
-  devtool: 'inline-source-map',
   node: {
     __filename: true,
     __dirname: true

@@ -14,12 +14,14 @@ RUN apk update && apk add --no-cache nmap && \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 WORKDIR app
+ENV RUN_MODE DOCKER
 
 COPY src ./src
 COPY package* ./
 COPY tsconfig.json ./
 COPY webpack.config.js ./
 
-RUN npm i && npm run build
+RUN mkdir config && mkdir report \
+    && npm i && npm run build
 
-CMD ['node', './dist/main.js']
+CMD ["node", "./dist/main.js"]
