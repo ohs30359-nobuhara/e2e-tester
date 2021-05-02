@@ -15,7 +15,13 @@ export class HeadlessBrowser {
   }
 
   public static async init(cookie: string): Promise<HeadlessBrowser> {
-    const b: Browser = await launch();
+    const b: Browser = await launch({
+      headless: true,
+      args: [
+        "--no-sandbox",
+        "--disable-gpu",
+      ]
+    });
     return new HeadlessBrowser(b, cookie);
   }
 }
