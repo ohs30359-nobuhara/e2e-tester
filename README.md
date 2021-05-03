@@ -11,9 +11,9 @@ please check the sample below for each setting
 ```shell
 target:
   actual:
-    host: 'https://example_new'
+    host: 'https://example.new'
   expect:
-    host: 'https://example_old'
+    host: 'https://example.old'
 option:
   header: 
     Cookie: 'xxx=xxx;'
@@ -45,4 +45,40 @@ docker run  \
   -v $(pwd)/${config_path}:/app/config \
   -v $(pwd)/${report_path}:/app/report \
   -it ${image_name}
+```
+
+## example
+testing for frontend
+```shell
+target:
+  actual:
+    host: 'https://example.new.front'
+  expect:
+    host: 'https://example.old.front'
+option:
+  header: 
+    Cookie: 'xxx=xxx;'
+    User-Agent: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+  query: 'query=xxx'
+  type: 'HTML'
+report:
+  dir: './report'
+```
+
+testing for api
+```shell
+target:
+  actual:
+    host: 'https://example.new.api'
+  expect:
+    host: 'https://example.old.api'
+option:
+  header: 
+    Cookie: 'xxx=xxx;'
+    User-Agent: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+  method: 'GET'
+  query: 'query=xxx'
+  type: 'API'
+report:
+  dir: './report'
 ```
