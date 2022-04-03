@@ -1,19 +1,14 @@
 import {HeadlessBrowser} from "./headlessBrowser";
 import {HeadlessPage} from "./headlessPage";
 import lookSame, {createDiff} from "looks-same";
-import {Config} from "../config";
-import {get} from "config";
+import {CliInterface} from "../Interface";
 
-export async function frontTest(): Promise<void> {
-  const targetConfig: Config.Target = get("target")
-  const optionConfig: Config.Option = get("option");
-  const reportOption: Config.Report = get("report");
-
-  const b: HeadlessBrowser = await HeadlessBrowser.init(optionConfig.header.Cookie || '')
-  const p: HeadlessPage = await b.newPage(targetConfig.expect.host);
+export async function frontTest(args: CliInterface): Promise<void> {
+  const b: HeadlessBrowser = await HeadlessBrowser.init(args.option.header.Cookie || '')
+  const p: HeadlessPage = await b.newPage(args.target.expect.host);
   await p.screenshot('actual');
 
-  await p.move(targetConfig.actual.host);
+  await p.move(args.target.actual.host);
   await p.screenshot('expect');
 
   const equal: boolean = await new Promise((resolve, reject) => {
@@ -29,7 +24,7 @@ export async function frontTest(): Promise<void> {
     createDiff({
       reference: 'dist/actual.png',
       current: 'dist/expect.png',
-      diff: `${reportOption.dir}/diff.png`,
+      diff: `${args.report.dir}/${Date.now()}.png`,
       highlightColor: '#ff00ff'
     }, (e) => {
       e? reject(e.message) : resolve(true);

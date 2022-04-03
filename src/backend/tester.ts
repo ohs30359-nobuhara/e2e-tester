@@ -1,30 +1,26 @@
-import {Config} from "../config";
-import {get} from "config";
 import {httpRequest} from "./httpRequest";
 import {createPatch, diffTrimmedLines} from "diff";
 import {appendFileSync} from 'fs'
+import {ApiOption, CliInterface} from "../Interface";
 
-export async function backendTest(): Promise<void> {
-  const targetConfig: Config.Target = get("target")
-  const optionConfig: Config.Option = get("option");
-  const reportOption: Config.Report = get("report");
-
+export async function backendTest(args: CliInterface): Promise<void> {
+  const option: ApiOption = args.option as ApiOption;
   let result: any = null;
 
-  result = await httpRequest(targetConfig.actual.host, {
-    headers: optionConfig.header,
-    params: optionConfig.query,
-    data: optionConfig.body,
-    method: optionConfig.method
+  result = await httpRequest(args.target.actual.host, {
+    headers: option.header,
+    params: option.query,
+    data: option.body,
+    method: option.method
   })
 
   const actual: string = JSON.stringify(result, null, 2)
 
-  result = await httpRequest(targetConfig.expect.host, {
-    headers: optionConfig.header,
-    params: optionConfig.query,
-    data: optionConfig.body,
-    method: optionConfig.method
+  result = await httpRequest(args.target.expect.host, {
+    headers: option.header,
+    params: option.query,
+    data: option.body,
+    method: option.method
   })
 
   const expect: string = JSON.stringify(result, null, 2)
@@ -32,5 +28,5 @@ export async function backendTest(): Promise<void> {
   // TODO: slack push
   console.log('diff?', diffTrimmedLines(actual, expect).length === 1);
 
-  appendFileSync(`${reportOption.dir}/patch.txt`, createPatch('patch result', actual, expect, 'actual', 'except'));
+  appendFileSync(`${args.report.dir}/patch.txt`, createPatch('patch result', actual, expect, 'actual', 'except'));
 }

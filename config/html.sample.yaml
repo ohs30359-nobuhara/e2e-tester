@@ -5,9 +5,8 @@ target:
     host: ''
 option:
   header: {}
-  method: 'GET'
-  body: ''
   query: ''
-  type: 'HTML'
+  waitSec: 1
+  fullScreen: false
 report:
   dir: ./report

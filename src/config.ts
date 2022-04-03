@@ -1,22 +1,15 @@
-export namespace Config {
-  export interface Target {
-    actual: {
-      host: string
-    }
-    expect: {
-      host: string
-    }
-  }
-  export interface Option {
-    header: {[key: string]: string}
-    method: 'GET' | 'POST'
-    body?: string
-    query?: string
-    type: 'HTML' | 'API'
-  }
+import {readFileSync} from 'fs'
+import {load} from 'js-yaml'
 
-  export interface Report {
-    dir: string
+let cache: any = null;
+
+export function get<T>(path: string): T | null {
+  try {
+    if (cache === null) {
+      cache = load(readFileSync(path, "utf-8"));
+    }
+    return cache;
+  } catch (e) {
+    return null
   }
 }
-

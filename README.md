@@ -5,9 +5,10 @@ It is a tool for comparing old and new,
 and detects and displays the difference between API or HTML.
 
 ## usage
-create a configuration file under `./config/default.yaml`.  
+create a configuration yaml file.  
 please check the sample below for each setting
 
+### API
 ```shell
 target:
   actual:
@@ -21,14 +22,30 @@ option:
   method: 'GET or POST'
   body: '{ sample: xxx }'
   query: 'query=xxx'
-  type: 'HTML or API'
 report:
   dir: './report'
 ```
 
-### mac 
+### HTML
+```shell
+target:
+  actual:
+    host: 'https://example.new'
+  expect:
+    host: 'https://example.old'
+option:
+  header: 
+    Cookie: 'xxx=xxx;'
+    User-Agent: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+  waitSec: 1 
+  fullScreen: false 
+report:
+  dir: './report'
+```
 
-run `npm i  && npm run start` after creating the config file.  
+### local 
+
+run `npm i  && npm run start --  -t ${API or HTML} -c ${config path}` after creating the config file.  
 in the sample, report is created under the `./report` directory.
 
 ### docker 
@@ -76,9 +93,8 @@ option:
   header: 
     Cookie: 'xxx=xxx;'
     User-Agent: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
-  method: 'GET'
-  query: 'query=xxx'
-  type: 'API'
+  waitSec: 1 
+  fullScreen: false 
 report:
   dir: './report'
 ```
