@@ -65,7 +65,7 @@ docker run  \
 ```
 
 ## example
-testing for frontend
+testing for api
 ```shell
 target:
   actual:
@@ -82,7 +82,7 @@ report:
   dir: './report'
 ```
 
-testing for api
+testing for frontend 
 ```shell
 target:
   actual:
