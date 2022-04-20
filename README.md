@@ -65,6 +65,7 @@ docker run  \
 ```
 
 ## example
+
 testing for api
 ```shell
 target:
@@ -97,4 +98,20 @@ option:
   fullScreen: false 
 report:
   dir: './report'
+```
+
+### demo
+start demo server
+```shell
+cd demo && npm run start
+```
+
+html test
+```shell
+npm run start --  -t HTML -c ./demo/config/html.sample.yaml
+```
+
+api test
+```shell
+npm run start --  -t API -c ./demo/config/api.sample.yaml
 ```

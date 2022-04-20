@@ -1,0 +1,12 @@
+target:
+  actual:
+    host: 'http://localhost:8080/html/old'
+  expect:
+    host: 'http://localhost:8080/html/new'
+option:
+  header: {}
+  query: ''
+  waitSec: 1
+  fullScreen: true
+report:
+  dir: ./report
