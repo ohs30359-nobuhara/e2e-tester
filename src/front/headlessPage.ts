@@ -18,7 +18,8 @@ export class HeadlessPage {
       height: 1600
     })
     await this.page.goto(url, {
-      waitUntil: "domcontentloaded"
+      waitUntil: "domcontentloaded",
+      timeout: 60000 // max wait 1min
     })
   }
 
