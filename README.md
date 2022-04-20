@@ -22,8 +22,6 @@ option:
   method: 'GET or POST'
   body: '{ sample: xxx }'
   query: 'query=xxx'
-report:
-  dir: './report'
 ```
 
 ### HTML
@@ -38,31 +36,22 @@ option:
     Cookie: 'xxx=xxx;'
     User-Agent: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
   waitSec: 1 
-  fullScreen: false 
-report:
-  dir: './report'
+  fullScreen: false
 ```
 
 ### local 
 
-run `npm i  && npm run start --  -t ${API or HTML} -c ${config path}` after creating the config file.  
-in the sample, report is created under the `./report` directory.
+run `npm i  && npm run start --  -t ${API or HTML} -c ${config path} -o ${dist dir}` after creating the config file.
 
 ### docker 
 
-create an image if you want to start with docker.
+create an image if you want to start with Docker.
 ```shell
 docker build -t ${image_name} ./
 ```
 
 execute the command by specifying the directory where the config file is located and the directory where the result is output.
 
-```shell
-docker run  \
-  -v $(pwd)/${config_path}:/app/config \
-  -v $(pwd)/${report_path}:/app/report \
-  -it ${image_name}
-```
 
 ## example
 
@@ -79,8 +68,6 @@ option:
     User-Agent: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
   query: 'query=xxx'
   type: 'HTML'
-report:
-  dir: './report'
 ```
 
 testing for frontend 
@@ -95,9 +82,7 @@ option:
     Cookie: 'xxx=xxx;'
     User-Agent: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
   waitSec: 1 
-  fullScreen: false 
-report:
-  dir: './report'
+  fullScreen: false
 ```
 
 ### demo
@@ -108,10 +93,10 @@ cd demo && npm run start
 
 html test
 ```shell
-npm run start --  -t HTML -c ./demo/config/html.sample.yaml
+npm run start --  -t HTML -c ./demo/config/html.sample.yaml -o report
 ```
 
 api test
 ```shell
-npm run start --  -t API -c ./demo/config/api.sample.yaml
+npm run start --  -t API -c ./demo/config/api.sample.yaml -o report
 ```

@@ -1,7 +1,6 @@
 export interface CliInterface {
   target: Target
   option: ApiOption | HtmlOption
-  report: Report
 }
 
 export interface Target {
@@ -25,8 +24,4 @@ export interface HtmlOption {
   query?: string
   waitSec?: number
   fullScreen: boolean
-}
-
-export interface Report {
-  dir: string
 }

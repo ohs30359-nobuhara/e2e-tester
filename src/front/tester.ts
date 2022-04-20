@@ -3,7 +3,7 @@ import {HeadlessPage} from "./headlessPage";
 import lookSame, {createDiff} from "looks-same";
 import {CliInterface} from "../Interface";
 
-export async function frontTest(args: CliInterface): Promise<void> {
+export async function frontTest(args: CliInterface, out: string): Promise<void> {
   const b: HeadlessBrowser = await HeadlessBrowser.init(args.option.header.Cookie || '')
   const p: HeadlessPage = await b.newPage(args.target.expect.host);
   await p.screenshot('actual');
@@ -24,7 +24,7 @@ export async function frontTest(args: CliInterface): Promise<void> {
     createDiff({
       reference: 'dist/actual.png',
       current: 'dist/expect.png',
-      diff: `${args.report.dir}/patch.png`,
+      diff: `${out}/patch.png`,
       highlightColor: '#ff00ff'
     }, (e) => {
       e? reject(e.message) : resolve(true);

@@ -3,7 +3,7 @@ import {createPatch, diffTrimmedLines} from "diff";
 import {appendFileSync} from 'fs'
 import {ApiOption, CliInterface} from "../Interface";
 
-export async function backendTest(args: CliInterface): Promise<void> {
+export async function backendTest(args: CliInterface, out: string): Promise<void> {
   const option: ApiOption = args.option as ApiOption;
   let result: any = null;
 
@@ -28,5 +28,5 @@ export async function backendTest(args: CliInterface): Promise<void> {
   // TODO: slack push
   console.log('diff?', diffTrimmedLines(actual, expect).length === 1);
 
-  appendFileSync(`${args.report.dir}/patch.txt`, createPatch('patch result', actual, expect, 'actual', 'except'));
+  appendFileSync(`${out}/patch.txt`, createPatch('patch result', actual, expect, 'actual', 'except'));
 }

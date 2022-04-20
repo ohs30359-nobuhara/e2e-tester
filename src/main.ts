@@ -7,11 +7,13 @@ import {CliInterface} from "./Interface";
 interface Option {
   type: 'HTML' | 'API'
   config: string
+  out: string
 }
 
 const command: Command = createCommand();
 command.requiredOption("-c --config <config>", "config path")
        .requiredOption("-t --type <type>", "test type HTML or API")
+       .requiredOption("-d --dist <dist>", "dir to output the report")
        .parse(process.argv);
 
 async function main(): Promise<void> {
@@ -25,10 +27,10 @@ async function main(): Promise<void> {
 
     switch (option.type) {
       case "HTML":
-        await frontTest(args)
+        await frontTest(args, option.out)
         break;
       case "API":
-        await backendTest(args);
+        await backendTest(args, option.out);
         break;
       default:
         console.error("'type' param is must be 'HTML' or 'API'")
