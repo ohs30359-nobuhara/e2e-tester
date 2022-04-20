@@ -24,7 +24,7 @@ export async function frontTest(args: CliInterface): Promise<void> {
     createDiff({
       reference: 'dist/actual.png',
       current: 'dist/expect.png',
-      diff: `${args.report.dir}/${Date.now()}.png`,
+      diff: `${args.report.dir}/patch.png`,
       highlightColor: '#ff00ff'
     }, (e) => {
       e? reject(e.message) : resolve(true);
