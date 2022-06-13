@@ -4,12 +4,13 @@ export interface CliInterface {
 }
 
 export interface Target {
-  actual: {
-    host: string
-  }
-  expect: {
-    host: string
-  }
+  actual: HostOption
+  expect: HostOption
+}
+
+export interface HostOption {
+  host: string
+  hostsPath: string | null
 }
 
 export interface ApiOption {

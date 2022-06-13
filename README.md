@@ -13,8 +13,10 @@ please check the sample below for each setting
 target:
   actual:
     host: 'https://example.new'
+    hostsFile: '/etc/actualHosts'
   expect:
     host: 'https://example.old'
+    hostsFile: '/etc/expectHosts'
 option:
   header: 
     Cookie: 'xxx=xxx;'
@@ -60,6 +62,7 @@ testing for api
 target:
   actual:
     host: 'https://example.new.front'
+    hostsFile: '/etc/newHosts'
   expect:
     host: 'https://example.old.front'
 option:
@@ -93,10 +96,11 @@ cd demo && npm run start
 
 html test
 ```shell
-npm run start --  -t HTML -c ./demo/config/html.sample.yaml -o report
+BASE_HOSTS="/etc/hosts" npm run start --  -t HTML -c ./demo/config/html.sample.yaml -d report
 ```
+※ `BASE_HOSTS` default values is `/etc/hosts`
 
 api test
 ```shell
-npm run start --  -t API -c ./demo/config/api.sample.yaml -o report
+npm run start --  -t API -c ./demo/config/api.sample.yaml -d report
 ```
